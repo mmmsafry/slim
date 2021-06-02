@@ -5,7 +5,7 @@ This application uses the latest Slim 3 with Slim PSR-7 implementation with Lara
 
 cloning repo 
 ```bash
-git clone https://github.com/...
+git clone https://github.com/mmmsafry/slim
 ```
 
 Install dependencies using composer 
