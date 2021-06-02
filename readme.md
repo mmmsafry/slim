@@ -17,7 +17,7 @@ composer install
 ### Database Backup
 Create Database ``slim_db``
 
-dump the database in root folder ``slim_db.sql`` 
+``slim_db.sql`` in root folder - import database   
 
 update mysql credential in ``app\config\database.php``
 
