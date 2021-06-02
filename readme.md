@@ -28,5 +28,6 @@ update mysql credential in ``app\config\database.php``
 php -S localhost:8080 -t public public/index.php
 ```
 
-After that, open POSTMAN `http://localhost:8080` in your browser.
+### POSTMAN
+After that, open POSTMAN `http://localhost:8080` run import ``slim-api.postman_collection.json`` and check the apis.
 
