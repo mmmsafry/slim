@@ -10,12 +10,13 @@ use App\Validation\Validator;
 use Psr\Http\Message\RequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Respect\Validation\Validator as v;
-
+ 
 class CategoryController
 {
     protected $customResponse;
     protected $categoryModel;
     protected $validator;
+    private $tree;
 
 
     public function __construct()
@@ -34,15 +35,56 @@ class CategoryController
         $this->customResponse->is200Response($response, "Category retrieved successfully", $category);
     }
 
+    
+
+    private function buildTree(array $elements, $parentId = 0) {
+        $branch = array();
+    
+        foreach ($elements as $element) {
+            if ($element['parent'] == $parentId) {
+                $children = $this->buildTree($elements, $element['id']);
+                if ($children) {
+                    $element[$element['description']] = $children;
+                }
+                $branch[] = $element;
+            }
+        }
+    
+        return $branch;
+    }
+
+    private function getChild($id){
+        
+        return array_filter($this->tree, function($e) use ($id){
+            // if($this->getChild($e['parent'])!=null){
+            //     return $e;
+            // }
+
+            return  $e['parent'] == $id;
+
+        });
+
+    }
+
     /**
      * This is the method for retrieve category tree data - used in Front end
      */
     public function getCategoryTree(Request $request, Response $response)
     {
-        $category = $this->categoryModel->with(['children' => function ($q) {
-            $q->with('children');
-        }])->where('parent', 0)->whereNull('deleted_at')->get();
-        $this->customResponse->is200Response($response, "Category tree retrieved successfully", $category);
+        $category = $this->categoryModel->select('id', 'description', 'parent')->whereNull('deleted_at')->get();
+        $categoryArray = json_decode(json_encode($category), true);
+
+        $tree = $this->buildTree($categoryArray);
+        $formatedTree = $this->formatTree($tree);
+
+        $this->customResponse->is200Response($response, "Category tree retrieved successfully", $formatedTree);
+    }
+
+    private function formatTree(array $tree){
+        return $tree;
+        return array_reduce($tree, function($e){
+            return $e['description'];
+        },'root');
     }
 
     public function store(Request $request, Response $response)
@@ -89,6 +131,4 @@ class CategoryController
 
         $this->customResponse->is200Response($response, $responseMessage);
     }
-
-
 }
