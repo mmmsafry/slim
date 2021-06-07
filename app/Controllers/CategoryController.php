@@ -26,11 +26,12 @@ class CategoryController
     }
 
     /**
-     * This is method is not used anywhere in the Angular Frontend.
+     * we are using this method in frontend to process the Facet  .
+     * Model changed after got the response.js
      */
     public function getCategory(Request $request, Response $response)
     {
-        $category = $this->categoryModel->all();
+        $category = $this->categoryModel->select('id', 'count', 'parent','name')->get();
         $this->customResponse->is200Response($response, "Category retrieved successfully", $category);
     }
 
