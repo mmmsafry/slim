@@ -13,7 +13,8 @@
 					{
 						"key": "Accept",
 						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"disabled": true
 					},
 					{
 						"key": "Content-Type",
@@ -22,9 +23,8 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer someSecretValue",
-						"type": "text",
-						"disabled": true
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJhbGF4QG1haWwuY29tIiwiaWF0IjoxNjIyNzM4NzEwLCJleHAiOjE2MjI3NDk1MTB9.YIhYoP0OboeRuJjCD7efhOJLxKjmAcmDpzMMCexSEIg",
+						"type": "text"
 					}
 				],
 				"url": {
@@ -50,15 +50,20 @@
 						"key": "Content-Type",
 						"value": "application/json",
 						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJhbGF4QG1haWwuY29tIiwiaWF0IjoxNjIyNzM4NzEwLCJleHAiOjE2MjI3NDk1MTB9.YIhYoP0OboeRuJjCD7efhOJLxKjmAcmDpzMMCexSEIg",
+						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8088/category-tree",
+					"raw": "http://localhost:8080/category-tree",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8088",
+					"port": "8080",
 					"path": [
 						"category-tree"
 					]
@@ -117,7 +122,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJhbGF4QG1haWwuY29tIiwiaWF0IjoxNjIyNjUyNjY1LCJleHAiOjE2MjI2NjM0NjV9.nN6Hg7f61dfSYhhULiFWVBv9wQFDlKkR5dGNHWsRu8U",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJhbGF4QG1haWwuY29tIiwiaWF0IjoxNjIyNzM5MTA1LCJleHAiOjE2MjI3NDk5MDV9.tF5ZDvW1PlntVr5YQG1aPrz2HgzjwNQlEJPfQ7KSxFA",
 						"type": "text"
 					}
 				],

@@ -42,6 +42,8 @@ class CategoryController
     {
         $category = $this->categoryModel->with(['children' => function ($q) {
             $q->with('children');
+            $q->selectRaw('count(id) as actualCount');
+            $q->orderByRaw('count(id) desc');
         }])->where('parent', 0)->whereNull('deleted_at')->get();
         $this->customResponse->is200Response($response, "Category tree retrieved successfully", $category);
     }
@@ -50,7 +52,7 @@ class CategoryController
     {
         $this->validator = new Validator();
         $this->validator->validate($request, [
-            "description" => v::notEmpty()
+            "name" => v::notEmpty()
         ]);
 
         if ($this->validator->failed()) {
@@ -59,7 +61,7 @@ class CategoryController
         }
 
         $this->categoryModel->create([
-            "description" => CustomRequestHandler::getParam($request, "description"),
+            "name" => CustomRequestHandler::getParam($request, "name"),
             "parent" => CustomRequestHandler::getParam($request, "parent")
         ]);
 
